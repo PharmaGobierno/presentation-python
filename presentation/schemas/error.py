@@ -1,18 +1,12 @@
-from typing import Optional, TypeVar
+from typing import Optional
 
-from pydantic import BaseModel, ConfigDict, Field
-
-ErrorSchemaT = TypeVar("ErrorSchemaT", bound="ErrorSchema")
+from .base import BaseSchema
 
 
-class ErrorSchema(BaseModel):
+class ErrorSchema(BaseSchema):
     code: str
     message: str
     details: str
-    location: str
+    location: Optional[str] = None
     parameter: Optional[str] = None
-    displayable_message: Optional[str] = Field(default=None)
-
-    model_config = ConfigDict(
-        populate_by_name=True, use_enum_values=True, extra="allow"
-    )
+    displayable_message: Optional[str] = None

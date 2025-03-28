@@ -29,18 +29,18 @@ class Response:
 
     @property
     def response(self) -> dict:
-        response = ResponseSchema(
+        response = ResponseSchema.from_params(
             errors=self.errors,
             data=self.data,
             process_id=self.process_id,
             version=self.version,
             status=self.status,
         )
-        return response.model_dump()
+        return response.dict()
 
     def update_data(self, result: dict) -> None:
         self.data.update(result)
 
     def add_error(self, code: BaseError) -> None:
         error = ErrorSchema(**code.error_schema)
-        self.errors.append(error.model_dump())
+        self.errors.append(error.dict())
