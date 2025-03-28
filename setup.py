@@ -20,6 +20,7 @@ setuptools.setup(
     keywords="presentation, webservices, library, python",
     packages=setuptools.find_packages(),
     package_data={"": ["*.json"]},
+    namespace_packages=["presentation"],
     install_requires=requirements_list,
     classifiers=["Programming Language :: Python :: 3"],
     python_requires=">=3.11",
