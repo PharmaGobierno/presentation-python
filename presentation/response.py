@@ -16,16 +16,17 @@ class Response:
         self.data = {}
         self.process_id = process_id
         self.version = version
+        self._status = None
 
     @property
     def status(self) -> int:
-        if self.status is None:
+        if self._status is None:
             raise ValueError("Status is not set in Presentation.Response object")
-        return self.status
+        return self._status
 
     @status.setter
     def status(self, value: int) -> None:
-        self.status = value
+        self._status = value
 
     @property
     def response(self) -> dict:
