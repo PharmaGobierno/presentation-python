@@ -1,11 +1,10 @@
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass, asdict
 from typing import Self
-
 
 @dataclass
 class BaseSchema:
     def dict(self):
-        return {k: str(v) for k, v in asdict(self).items()}
+        return asdict(self)
 
     @classmethod
     def from_params(cls, **kwargs) -> Self:

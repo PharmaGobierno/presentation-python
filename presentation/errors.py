@@ -16,9 +16,9 @@ class BaseError(Exception):
     __version__ = "1.0.0"
     ERROR_LOCATION = ErrorLocationEnum
 
-    code: str
-    message: str
-    http_status: int
+    code: str = None
+    message: str = None
+    http_status: int = 500
 
     def __init__(
         self,
@@ -27,6 +27,9 @@ class BaseError(Exception):
         parameter: Optional[str] = None,
         displayable_message: Optional[str] = None,
     ):
+        if not self.code or not self.message:
+            raise ValueError("Missing required fields in error subclass")
+        
         self.details = details
         self.location = location
         self.parameter = parameter

@@ -44,4 +44,4 @@ class Response:
 
     def add_error(self, code: BaseError) -> None:
         error = ErrorSchema(**code.error_schema)
-        self.errors.append(error.dict())
+        self.errors.append(error)
