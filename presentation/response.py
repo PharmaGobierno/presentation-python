@@ -29,7 +29,7 @@ class Response:
 
     @property
     def response(self) -> dict:
-        response = ResponseSchema.from_params(
+        response = ResponseSchema(
             errors=self.errors,
             data=self.data,
             process_id=self.process_id,

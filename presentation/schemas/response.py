@@ -1,4 +1,4 @@
-from dataclasses import field
+from dataclasses import dataclass, field
 from time import time
 from typing import List, Optional, TypeVar
 
@@ -7,7 +7,7 @@ from .error import ErrorSchema
 
 ResponseSchemaT = TypeVar("ResponseSchemaT", bound="ResponseSchema")
 
-
+@dataclass
 class ResponseSchema(BaseSchema):
     status: int
     process_id: str
