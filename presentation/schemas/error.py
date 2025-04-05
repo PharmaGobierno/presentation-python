@@ -1,6 +1,8 @@
-from typing import Optional
 from dataclasses import dataclass
+from typing import Optional
+
 from .base import BaseSchema
+
 
 @dataclass
 class ErrorSchema(BaseSchema):
