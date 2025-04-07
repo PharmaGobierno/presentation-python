@@ -16,8 +16,8 @@ class BaseError(Exception):
     __version__ = "1.0.0"
     ERROR_LOCATION = ErrorLocationEnum
 
-    code: str = None
-    message: str = None
+    code: str 
+    message: str
     http_status: int = 500
 
     def __init__(
