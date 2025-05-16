@@ -81,3 +81,17 @@ class ForbiddenError(BaseError):
     code: str = "FORBIDDEN"
     message: str = "The request has been understood but server refuses to authorize it."
     http_status = 403
+
+
+class UnauthorizedError(BaseError):
+    code: str = "UNAUTHORIZED"
+    message: str = "Client must authenticate."
+    http_status = 401
+
+
+class ConflictError(BaseError):
+    code: str = "CONFLICT"
+    message: str = (
+        "Conflict on request data. Client might be able to resolve and resubmit the request."
+    )
+    http_status = 409
