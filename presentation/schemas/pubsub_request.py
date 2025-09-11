@@ -1,3 +1,4 @@
+import binascii
 from base64 import b64decode
 from dataclasses import dataclass
 from json import decoder, loads
@@ -5,19 +6,24 @@ from typing import Any, Dict, Optional, Union
 
 
 def decode_b64(
-    b64_value: Union[Any, bytes, str, bytearray, memoryview], validate: bool = False
+    value: Union[Any, bytes, str, bytearray, memoryview], validate: bool = False
 ) -> Dict[str, Any]:
-    if isinstance(b64_value, str):
-        b64_value = b64_value.encode("utf-8")
-    elif not isinstance(b64_value, (bytes, str, bytearray, memoryview)):
+    if isinstance(value, str):
+        value = value.encode("utf-8")
+    elif not isinstance(value, (bytes, str, bytearray, memoryview)):
         # TODO: check this case
-        b64_value = bytes(b64_value)
+        value = bytes(value)
     else:
         raise TypeError("The pubsub data have a value type that cant be decoded")
+
     try:
-        _b64 = b64decode(b64_value, validate=validate)
-        _b64_decoded = _b64.decode("utf-8")
-        _json = loads(_b64_decoded)
+        _b64 = b64decode(value, validate=validate)
+        _decoded_str = _b64.decode("utf-8")
+    except (binascii.Error, ValueError):
+        # the value is not base64 encoded
+        _decoded_str = value.decode("utf-8")
+    try:
+        _json = loads(_decoded_str)
     except decoder.JSONDecodeError:
         _json = {}
     return _json
